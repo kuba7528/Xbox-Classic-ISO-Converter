@@ -24,12 +24,10 @@ Aplikacja posiada wbudowany **parser plików `default.xbe`**, który automatyczn
   - Wyciąganie `TitleId`, oryginalnego `TitleName` w Unicode oraz flag bitowych `Region`.
 - 🏷️ **Dynamiczne szablony nazw**:
   - Możliwość zdefiniowania wzorca dla plików wyjściowych z użyciem tagów `{TitleId}`, `{TitleName}`, `{Region}` (np. `{TitleId} - {TitleName}.iso`).
-- 📁 **Wsparcie dla Drag & Drop oraz Skanowania**:
-  - Przeciągnij i upuść pliki/foldery bezpośrednio do aplikacji.
-  - Skanuj całe katalogi nadrzędne ze wszystkimi Twoimi grami za jednym kliknięciem.
-- ⚡ **Stabilność i Wydajność**:
-  - Bezpieczne asynchroniczne wykonywanie operacji w tle (`Task.Run`).
-  - Wykorzystanie sprawdzonego silnika `extract-xiso.exe`.
+- 📁 **Wbudowany Silnik extract-xiso.exe**:
+  - Silnik `extract-xiso.exe` jest wkompilowany bezpośrednio w zasoby aplikacji (`EmbeddedResource`).
+  - Aplikacja automatycznie go wypakowuje przy pierwszym uruchomieniu — brak konieczności ręcznego pobierania!
+  - Wciąż istnieje możliwość wyboru własnej ścieżki do innej wersji `extract-xiso.exe` w GUI.
 
 ---
 

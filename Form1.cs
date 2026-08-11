@@ -18,7 +18,37 @@ namespace XboxIsoConverter
             InitializeComponent();
             txtOutIsoDir.Text = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ConvertedISOs");
             txtOutExtractedDir.Text = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ExtractedGames");
+            txtEnginePath.Text = EnsureEngineExtracted();
             btnStart.Click += async (s, e) => await ProcessQueueAsync();
+        }
+
+        private string EnsureEngineExtracted()
+        {
+            string engineFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "extract-xiso.exe");
+            if (File.Exists(engineFile))
+            {
+                return engineFile;
+            }
+
+            try
+            {
+                var assembly = System.Reflection.Assembly.GetExecutingAssembly();
+                string resourceName = "XboxIsoConverter.extract-xiso.exe";
+
+                using Stream? stream = assembly.GetManifestResourceStream(resourceName);
+                if (stream != null)
+                {
+                    using FileStream fs = new FileStream(engineFile, FileMode.Create, FileAccess.Write);
+                    stream.CopyTo(fs);
+                    return engineFile;
+                }
+            }
+            catch
+            {
+                // W przypadku błędu zwróć wyznaczoną ścieżkę domyślną
+            }
+
+            return engineFile;
         }
 
         #region Obsługa Listy Folderów
